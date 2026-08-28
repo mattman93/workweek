@@ -1,0 +1,79 @@
+<% title = 'Schedule' %>
+<%- include('partials/head') %>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<div class="app-shell">
+  <%- include('partials/sidebar', { active: 'schedule' }) %>
+
+  <main class="page wide">
+    <h1>Schedule</h1>
+    <p class="subtitle">
+      <% if (dueTodayCount === 0) { %>
+        No clients are due for service today.
+      <% } else { %>
+        <span class="due-today-badge"><%= dueTodayCount %> due today</span>
+      <% } %>
+    </p>
+
+    <% if (missingCount > 0) { %>
+      <div class="alert alert-info">
+        <%= missingCount %> client<%= missingCount === 1 ? '' : 's' %> could not be placed on the map
+        (address could not be geocoded). Double-check their address<%= missingCount === 1 ? '' : 'es' %> on the
+        <a href="/clients">clients page</a>.
+      </div>
+    <% } %>
+
+    <div id="map"></div>
+
+    <div class="map-legend">
+      <span><span class="dot due"></span>Due today</span>
+      <span><span class="dot other"></span>Other clients</span>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      const clients = <%- JSON.stringify(clients).replace(/</g, '\\u003c') %>;
+
+      const map = L.map('map').setView([39.8283, -98.5795], 4);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      function createIcon(color) {
+        return L.divIcon({
+          className: 'client-marker',
+          html:
+            '<div style="background:' + color + ';width:16px;height:16px;border-radius:50% 50% 50% 0;' +
+            'transform:rotate(-45deg);border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.4);"></div>',
+          iconSize: [16, 16],
+          iconAnchor: [8, 16],
+          popupAnchor: [0, -16],
+        });
+      }
+
+      const dueIcon = createIcon('#ea580c');
+      const otherIcon = createIcon('#2563eb');
+
+      if (clients.length > 0) {
+        const markers = clients.map(function (client) {
+          return L.marker([client.lat, client.lng], { icon: client.dueToday ? dueIcon : otherIcon })
+            .addTo(map)
+            .bindPopup(
+              '<strong>' + client.name + '</strong><br>' + client.address +
+              (client.dueToday ? '<br><strong style="color:#ea580c;">Due today</strong>' : '')
+            );
+        });
+
+        const group = L.featureGroup(markers);
+        map.fitBounds(group.getBounds(), { padding: [30, 30] });
+        if (clients.length === 1) {
+          map.setZoom(14);
+        }
+      }
+    </script>
+  </main>
+</div>
+
+<%- include('partials/foot') %>

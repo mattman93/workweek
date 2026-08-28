@@ -1,0 +1,19 @@
+<aside class="sidebar">
+  <a href="/schedule" class="sidebar-brand">Workweek</a>
+
+  <nav>
+    <a href="/employees" class="<%= active === 'employees' ? 'active' : '' %>">Employees</a>
+    <a href="/clients" class="<%= active === 'clients' ? 'active' : '' %>">Clients</a>
+    <a href="/routes" class="<%= active === 'routes' ? 'active' : '' %>">Routes</a>
+    <a href="/revenue" class="<%= active === 'revenue' ? 'active' : '' %>">Revenue</a>
+    <a href="/messages" class="<%= active === 'messages' ? 'active' : '' %>">Messages</a>
+    <a href="/schedule" class="<%= active === 'schedule' ? 'active' : '' %>">Schedule</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <span class="business-name"><%= businessName %></span>
+    <form action="/logout" method="POST">
+      <button type="submit">Log out</button>
+    </form>
+  </div>
+</aside>

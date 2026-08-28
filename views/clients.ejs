@@ -1,0 +1,71 @@
+<% title = 'Clients' %>
+<%- include('partials/head') %>
+
+<div class="app-shell">
+  <%- include('partials/sidebar', { active: 'clients' }) %>
+
+  <main class="page">
+    <h1>Clients</h1>
+
+    <% if (error) { %>
+      <div class="alert"><%= error %></div>
+    <% } %>
+
+    <section class="form-card">
+      <h2>Add client</h2>
+      <form method="POST" action="/clients" class="inline-form">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="text" name="address" placeholder="Address" required />
+        <input type="email" name="email" placeholder="Email" />
+        <input type="tel" name="phone" placeholder="Phone" />
+        <input type="date" name="next_service_date" title="Next service date" />
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Client list (<%= clients.length %>)</h2>
+      <% if (clients.length === 0) { %>
+        <p class="empty-state">No clients yet. Add your first one above.</p>
+      <% } else { %>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>On map</th>
+              <th>Next service</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% clients.forEach(function(client) { %>
+              <tr>
+                <td><%= client.name %></td>
+                <td><%= client.address %></td>
+                <td><%= client.email || '—' %></td>
+                <td><%= client.phone || '—' %></td>
+                <td><%= client.lat && client.lng ? '✓' : '—' %></td>
+                <td>
+                  <form method="POST" action="/clients/<%= client.id %>/schedule" class="schedule-form">
+                    <input type="date" name="next_service_date" value="<%= client.next_service_date || '' %>" />
+                    <button type="submit">Save</button>
+                  </form>
+                </td>
+                <td>
+                  <form method="POST" action="/clients/<%= client.id %>/delete" onsubmit="return confirm('Remove this client?');">
+                    <button type="submit" class="link-button">Remove</button>
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } %>
+    </section>
+  </main>
+</div>
+
+<%- include('partials/foot') %>

@@ -1,0 +1,61 @@
+<% title = 'Employees' %>
+<%- include('partials/head') %>
+
+<div class="app-shell">
+  <%- include('partials/sidebar', { active: 'employees' }) %>
+
+  <main class="page">
+    <h1>Employees</h1>
+
+    <% if (error) { %>
+      <div class="alert"><%= error %></div>
+    <% } %>
+
+    <section class="form-card">
+      <h2>Add employee</h2>
+      <form method="POST" action="/employees" class="inline-form">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="Email" />
+        <input type="tel" name="phone" placeholder="Phone" />
+        <input type="text" name="role" placeholder="Role (e.g. Technician)" />
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Team (<%= employees.length %>)</h2>
+      <% if (employees.length === 0) { %>
+        <p class="empty-state">No employees yet. Add your first one above.</p>
+      <% } else { %>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% employees.forEach(function(emp) { %>
+              <tr>
+                <td><%= emp.name %></td>
+                <td><%= emp.role || '—' %></td>
+                <td><%= emp.email || '—' %></td>
+                <td><%= emp.phone || '—' %></td>
+                <td>
+                  <form method="POST" action="/employees/<%= emp.id %>/delete" onsubmit="return confirm('Remove this employee?');">
+                    <button type="submit" class="link-button">Remove</button>
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } %>
+    </section>
+  </main>
+</div>
+
+<%- include('partials/foot') %>
