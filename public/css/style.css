@@ -36,9 +36,19 @@ a {
 }
 
 .topbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   font-size: 1.1rem;
   color: var(--color-text);
+}
+
+.pin-icon {
+  width: 18px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
 }
 
 .business-name {
@@ -65,7 +75,9 @@ a {
 }
 
 .sidebar-brand {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 0 20px 20px;
   font-weight: 700;
   font-size: 1.1rem;
@@ -158,16 +170,30 @@ a {
   max-width: 380px;
 }
 
+.brand-block {
+  margin-bottom: 20px;
+}
+
 .logo-mark {
   display: flex;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .logo-mark svg {
   width: 110px;
   height: auto;
   display: block;
+}
+
+.tagline {
+  margin: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
 }
 
 .auth-card h1 {

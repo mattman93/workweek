@@ -1,5 +1,8 @@
 <aside class="sidebar">
-  <a href="/schedule" class="sidebar-brand">Workweek</a>
+  <a href="/schedule" class="sidebar-brand">
+    <%- include('pin-icon') %>
+    <span>Workweek</span>
+  </a>
 
   <nav>
     <a href="/employees" class="<%= active === 'employees' ? 'active' : '' %>">Employees</a>
