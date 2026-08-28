@@ -29,6 +29,7 @@
       <% if (clients.length === 0) { %>
         <p class="empty-state">No clients yet. Add your first one above.</p>
       <% } else { %>
+        <div class="table-scroll">
         <table class="data-table">
           <thead>
             <tr>
@@ -64,6 +65,7 @@
             <% }); %>
           </tbody>
         </table>
+        </div>
       <% } %>
     </section>
   </main>

@@ -1,10 +1,22 @@
+<header class="mobile-topbar">
+  <button type="button" class="mobile-nav-toggle" aria-label="Open menu" aria-expanded="false" onclick="document.querySelector('.sidebar').classList.add('open'); document.querySelector('.sidebar-overlay').classList.add('open');">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="/schedule" class="mobile-brand">
+    <%- include('pin-icon') %>
+    <span>workweek</span>
+  </a>
+</header>
+
+<div class="sidebar-overlay" onclick="document.querySelector('.sidebar').classList.remove('open'); this.classList.remove('open');"></div>
+
 <aside class="sidebar">
   <a href="/schedule" class="sidebar-brand">
     <%- include('pin-icon') %>
     <span>workweek</span>
   </a>
 
-  <nav>
+  <nav onclick="document.querySelector('.sidebar').classList.remove('open'); document.querySelector('.sidebar-overlay').classList.remove('open');">
     <a href="/employees" class="<%= active === 'employees' ? 'active' : '' %>">Employees</a>
     <a href="/clients" class="<%= active === 'clients' ? 'active' : '' %>">Clients</a>
     <a href="/routes" class="<%= active === 'routes' ? 'active' : '' %>">Routes</a>

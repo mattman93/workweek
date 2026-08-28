@@ -28,6 +28,7 @@
       <% if (employees.length === 0) { %>
         <p class="empty-state">No employees yet. Add your first one above.</p>
       <% } else { %>
+        <div class="table-scroll">
         <table class="data-table">
           <thead>
             <tr>
@@ -54,6 +55,7 @@
             <% }); %>
           </tbody>
         </table>
+        </div>
       <% } %>
     </section>
   </main>
