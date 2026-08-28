@@ -4,8 +4,8 @@
   --color-border: #e2e5ea;
   --color-text: #1a1d23;
   --color-muted: #6b7280;
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
+  --color-primary: #33363b;
+  --color-primary-hover: #202226;
   --color-danger: #dc2626;
   --color-due: #ea580c;
   --radius: 8px;
@@ -95,7 +95,7 @@ a {
 .sidebar nav a.active {
   color: var(--color-primary);
   border-left-color: var(--color-primary);
-  background: #eff6ff;
+  background: #f1f1f2;
   font-weight: 600;
 }
 
@@ -156,6 +156,18 @@ a {
   padding: 32px;
   width: 100%;
   max-width: 380px;
+}
+
+.logo-mark {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.logo-mark svg {
+  width: 110px;
+  height: auto;
+  display: block;
 }
 
 .auth-card h1 {
