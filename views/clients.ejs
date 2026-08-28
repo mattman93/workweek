@@ -4,6 +4,7 @@
 <div class="app-shell">
   <%- include('partials/sidebar', { active: 'clients' }) %>
 
+  <div class="content-column">
   <main class="page">
     <h1>Clients</h1>
 
@@ -66,6 +67,8 @@
       <% } %>
     </section>
   </main>
+  <%- include('partials/footer-only') %>
+  </div>
 </div>
 
-<%- include('partials/foot') %>
+<%- include('partials/close') %>

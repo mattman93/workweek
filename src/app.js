@@ -31,8 +31,11 @@ app.use(
   })
 );
 
+const ASSET_VERSION = Date.now();
+
 app.use((req, res, next) => {
   res.locals.businessName = req.session.businessName || null;
+  res.locals.assetVersion = ASSET_VERSION;
   next();
 });
 
