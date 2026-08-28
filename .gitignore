@@ -1,4 +1,4 @@
 node_modules/
 .env
-data/*.sqlite
-data/*.sqlite-journal
+data/*.sqlite*
+.claude/
